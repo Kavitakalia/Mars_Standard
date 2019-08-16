@@ -1,0 +1,107 @@
+{
+	"info": {
+		"_postman_id": "089da5da-94ff-4232-8336-c74e14acf7fb",
+		"name": "PetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "11aa7a55-fb57-43b3-838e-2e2afefacb09",
+						"exec": [
+							"let pet = pm.sendRequest(\"http://petstore.swagger.io/#/pet/addPet\", function (err, response)",
+							"{",
+							"    console.log(pet.json());",
+							"    //console.log(response.json());",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"405 Not Allowed\");",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+				},
+				"url": {
+					"raw": "{{PetStoreUrl}}/pet/addPet",
+					"host": [
+						"{{PetStoreUrl}}"
+					],
+					"path": [
+						"pet",
+						"addPet"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7d03a81c-1930-4c41-8f6f-5df3d31d62ed",
+						"exec": [
+							"pm.test(\"Status code is 405 Not Allowed\", function () {",
+							"    pm.response.to.have.status(405);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\" : \"Kavita\",\n\t\"password\" : \"test\"\n\t\n}"
+				},
+				"url": {
+					"raw": "{{PetStoreUrl}}/user",
+					"host": [
+						"{{PetStoreUrl}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
